@@ -64,6 +64,58 @@ public class CallableFutureDemo {
     }
 
     /**
+     * 在线程池ExecutorService中直接执行Callable，阻塞主线程地获取线程执行结果
+     */
+    public void runCallableInThreadPoolBlock() {
+
+        //结合线程池ExecutorService使用
+        //（1）创建任务
+        Callable callable = new Callable<String>() {
+            public String call() {
+                System.out.println("线程任务2 正在执行");
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    System.out.println("future.cancel()会导致当前线程被中断interrput");
+                    System.out.println("在这里做一些线程终止前的清理操作");
+                    e.printStackTrace();
+                }
+                System.out.println("线程退出");
+                return "线程任务2返回值";
+            }
+        };
+
+        //（2）创建线程池
+        ExecutorService executor = Executors.newCachedThreadPool(); //创建线程池
+        //（3）使用线程池执行任务
+        Future future = executor.submit(callable);
+
+        //（4）对异步计算结果futureTask操作：isDone()、cancel()、get()...
+        //操作一：获取任务执行情况
+//            while (!future.isDone()) {
+//                System.out.println("任务是否完成：" + future.isDone());
+//            }
+
+        //操作二：取消线程任务：使用interrput()中断线程
+        // 1) 如果线程尚未执行，则直接取消成功，返回true
+        // 2) 若线程正在执行中，则使用interrput()中断线程，返回true （注意这里的终止线程方式与Thread interrupt()一样，参见StopThread.java）
+        // 3) 如果线程任务2已经执行完毕，则取消失败，返回false
+//        System.out.println("中断线程任务2：" + future.cancel(true));
+//        System.out.println("线程任务2 被中断结果：" + future.isCancelled());
+
+        //操作三：阻塞获取线程执行结果：使用execute/submit的入参futureTask
+        try {
+            String result = (String) future.get(); //get方法会阻塞直到子线程执行完毕
+            System.out.println("线程任务2 返回结果：" + result);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
      * 在线程池ExecutorService中执行FutureTask，阻塞主线程地获取线程执行结果
      */
     public void runInThreadPoolBlock() {

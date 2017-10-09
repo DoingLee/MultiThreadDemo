@@ -8,7 +8,8 @@ public class CallableFutureDemoTest {
 
     @Test
     public void test() throws Exception {
-        new CallableFutureDemo().runInThreadBlock();
+//        new CallableFutureDemo().runInThreadBlock();
+        new CallableFutureDemo().runCallableInThreadPoolBlock();
 //        new CallableFutureDemo().runInThreadPoolBlock();
 //        new CallableFutureDemo().runInThreadPoolNonBlock();
 
