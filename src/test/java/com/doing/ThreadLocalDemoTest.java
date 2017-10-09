@@ -9,7 +9,7 @@ public class ThreadLocalDemoTest {
     public void test() throws Exception {
         new ThreadLocalDemo().test();
 
-        Thread.sleep(2000);
+        Thread.sleep(3000);
     }
 
 }
