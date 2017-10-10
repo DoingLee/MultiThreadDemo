@@ -10,11 +10,11 @@ public class ReadWriteLockDemoTest {
         Thread.sleep(15000);
     }
 
-//    @Test
-//    public void testThreadUnSafe() throws Exception {
-//        new ReadWriteLockDemo().testThreadUnSafe();
-//
-//        Thread.sleep(3000);
-//    }
+    @Test
+    public void testThreadUnSafe() throws Exception {
+        new ReadWriteLockDemo().testThreadUnSafe();
+
+        Thread.sleep(3000);
+    }
 
 }

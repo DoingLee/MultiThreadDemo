@@ -10,6 +10,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ReadWriteLockDemo {
 
+    /********************************* 线程安全例子 ****************************/
+
     private ConcurrentCache concurrentCache = new ConcurrentCache();
 
     public void testThreadSafe() {
@@ -97,42 +99,45 @@ public class ReadWriteLockDemo {
 
     }
 
-//    private Cache cache = new Cache();
-//    public void testThreadUnSafe() {
-//        for (int i = 0 ; i < 10; i++) {
-//            final int num = i;
-//            Thread putThread = new Thread(new Runnable() {
-//                public void run() {
-//                    System.out.println("放入鸡蛋：" + num);
-//                    cache.put("num" + num, "鸡蛋" + num);
-//                }
-//            });
-//            Thread getThread = new Thread(new Runnable() {
-//                public void run() {
-//                    System.out.println("获取鸡蛋：" + cache.get("num" + num));
-//                }
-//            });
-//            putThread.run();
-//            getThread.run();
-//        }
-//    }
+    /********************************* 线程不安全例子 ****************************/
+
+    private Cache cache = new Cache();
+
+    public void testThreadUnSafe() {
+        for (int i = 0 ; i < 10; i++) {
+            final int num = i;
+            Thread putThread = new Thread(new Runnable() {
+                public void run() {
+                    System.out.println("放入鸡蛋：" + num);
+                    cache.put("num" + num, "鸡蛋" + num);
+                }
+            });
+            Thread getThread = new Thread(new Runnable() {
+                public void run() {
+                    System.out.println("获取鸡蛋：" + cache.get("num" + num));
+                }
+            });
+            putThread.start();
+            getThread.start();
+        }
+    }
 
 
-//    public class Cache {
-//        private HashMap<String, Object> map = new HashMap<String, Object>();
-//
-//        public Object get(String key) {
-//            return map.get(key);
-//        }
-//
-//        public void put(String key, Object value) {
-//            map.put(key, value);
-//            return;
-//        }
-//
-//        public void clear() {
-//            map.clear();
-//            return;
-//        }
-//    }
+    public class Cache {
+        private HashMap<String, Object> map = new HashMap<String, Object>();
+
+        public Object get(String key) {
+            return map.get(key);
+        }
+
+        public void put(String key, Object value) {
+            map.put(key, value);
+            return;
+        }
+
+        public void clear() {
+            map.clear();
+            return;
+        }
+    }
 }
