@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ReentrantLockDemo {
 
-    private ReentrantLock lock = new ReentrantLock(false); //默认为false非公平锁
+    private ReentrantLock lock = new ReentrantLock(false); //默认为false - 非公平锁
     private Condition condition = lock.newCondition(); //等待/通知组件
 
     public void test() throws InterruptedException {
@@ -31,7 +31,7 @@ public class ReentrantLockDemo {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }finally {
+            } finally {
                 lock.unlock();
             }
             System.out.println("FirstThread 释放对象锁，进行其他不需要对象锁的工作");
@@ -49,7 +49,7 @@ public class ReentrantLockDemo {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }finally {
+            } finally {
                 lock.unlock();
             }
             System.out.println("SecondThread 释放对象锁，进行其他不需要对象锁的工作");
@@ -61,9 +61,9 @@ public class ReentrantLockDemo {
             lock.lock();
             try {
                 System.out.println("ThirdThread 获得对象锁");
-                System.out.println("ThirdThread notify使得对象锁等待队列的线程出队列，进入锁阻塞等待队列");
 //                condition.signal();
                 condition.signalAll();
+                System.out.println("ThirdThread notify使得对象锁等待队列的线程出队列，进入锁阻塞等待队列");
 
                 try {
                     System.out.println("ThirdThread 继续占有对象锁，进行工作。。。");
@@ -71,7 +71,7 @@ public class ReentrantLockDemo {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }finally {
+            } finally {
                 lock.unlock();
             }
 
