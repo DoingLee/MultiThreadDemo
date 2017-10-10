@@ -23,7 +23,7 @@ public class ReadWriteLockDemo {
                     concurrentCache.put("num" + num, "鸡蛋" + num);
                 }
             });
-            putThread.run();
+            putThread.start();
 
             //加写锁线程
             for (int j = 0; j < 5; j++) {
@@ -33,10 +33,8 @@ public class ReadWriteLockDemo {
                         System.out.println("第" + num2 + "次获取鸡蛋" + num + "：" + concurrentCache.get("num" + num));
                     }
                 });
-                getThread.run();
+                getThread.start();
             }
-
-            System.out.println();
         }
 
     }
@@ -78,7 +76,7 @@ public class ReadWriteLockDemo {
                 System.out.println("写入数据时间(秒)：" + Calendar.getInstance().get(Calendar.SECOND));
                 //模拟长时间占有写锁
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

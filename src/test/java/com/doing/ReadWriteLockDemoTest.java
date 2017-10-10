@@ -7,7 +7,7 @@ public class ReadWriteLockDemoTest {
     public void testThreadSave() throws Exception {
         new ReadWriteLockDemo().testThreadSafe();
 
-        Thread.sleep(3000);
+        Thread.sleep(15000);
     }
 
 //    @Test
