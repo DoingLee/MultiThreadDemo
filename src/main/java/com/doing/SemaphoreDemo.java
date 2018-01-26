@@ -8,6 +8,21 @@ import java.util.concurrent.Semaphore;
 public class SemaphoreDemo {
     static Semaphore semaphore = new Semaphore(3);
 
+    /**
+     * 输出：
+     * 线程0开始工作
+     * 线程1开始工作
+     * 线程2开始工作
+     * 线程3开始工作
+     * 线程4开始工作
+     * 线程5开始工作
+     * 线程6开始工作
+     * 线程8开始工作
+     * 线程7开始工作
+     * 线程9开始工作
+     * 线程10开始工作
+     * 线程11开始工作
+     */
     public static void testSemaphore() {
         for (int i = 0; i < 12; i++) {
             final int num = i;
