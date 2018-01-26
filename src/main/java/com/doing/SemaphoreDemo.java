@@ -6,6 +6,7 @@ import java.util.concurrent.Semaphore;
  * @author：ldy on 26/01/2018 10:36
  */
 public class SemaphoreDemo {
+
     static Semaphore semaphore = new Semaphore(3);
 
     /**
